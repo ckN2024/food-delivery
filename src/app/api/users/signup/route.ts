@@ -2,6 +2,7 @@ import connectDB from "@/app/dbConfig/dbConfig";
 import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/user.model";
 import bcrypt from "bcrypt";
+import { sendEmail } from "@/app/helpers/mailer";
 
 // connect to database
 connectDB();
@@ -45,7 +46,11 @@ export async function POST(request: NextRequest) {
             role,
             password: hashedPassword
         })
-        await newUser.save();
+        const savedUser = await newUser.save();
+
+        //send verification email
+        sendEmail({email, emailType: "VERIFY", userId: savedUser._id})
+
         return NextResponse.json(newUser);
     } catch (err) {
         console.log("Failed to create and save user in database!!!");
