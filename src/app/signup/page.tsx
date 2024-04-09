@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Image from 'next/image'
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Signup = () => {
   const router = useRouter()
@@ -144,6 +145,9 @@ const Signup = () => {
               </button>
             </div>
           </form>
+          
+          <p className="text-slate-500 text-center">Already signed up? <Link href="/login" className="font-bold text-blue-600 underline hover:cursor-pointer">Log in</Link></p>
+
         </div>
       </div>
     </>
