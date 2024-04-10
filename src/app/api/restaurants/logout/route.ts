@@ -1,14 +1,15 @@
 import { NextResponse } from "next/server";
 
+
 export function GET() {
     try {
         const response = NextResponse.json({
-            message: "User logged out successfully."
+            message: "Restaurant logged out successfully."
         }, {status: 200})
 
         response.cookies.set("token", "", {httpOnly: true});
 
-        return response
+        return response;
     } catch (err) {
         console.log("Logout error.")
         return NextResponse.json(err)

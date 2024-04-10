@@ -1,24 +1,22 @@
 import mongoose from "mongoose";
-import Restaurant from "./restaurant.model";
-
 
 // when user gives restaurant review
-const reviewSchema = new mongoose.Schema({
+const restaurantReviewSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: User
+        ref: "User"
     },
     
     restaurantId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: Restaurant
+        ref: "Restaurant"
     },
 
     rating: {
         type: Number,
         required: [true, "rating field is required"],
         default: 0,
-        min: [0, "minumum rating is 0"],
+        min: [0, "minimum rating is 0"],
         max: [5, "maximum rating is 5"],
     },
 
@@ -30,8 +28,8 @@ const reviewSchema = new mongoose.Schema({
 
 
 
-}, {timestapms: true})
+}, {timestamps: true})
 
-const Review = mongoose.models.reviews || mongoose.model('reviews', reviewSchema);
+const RestaurantReview = mongoose.models.restaurantreviews || mongoose.model('restaurantreviews', restaurantReviewSchema);
 
-export default Review;
+export default RestaurantReview;

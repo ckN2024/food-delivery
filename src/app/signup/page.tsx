@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Image from 'next/image'
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const Signup = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -20,15 +20,20 @@ const Signup = () => {
     e.preventDefault();
 
     // trim unneccesary spaces
-    setFormData({ ...formData,
-      firstName : formData.firstName.trim(),
-      email : formData.email.trim(),
-      password: formData.password.trim()
-    })
+    setFormData({
+      ...formData,
+      firstName: formData.firstName.trim(),
+      email: formData.email.trim(),
+      password: formData.password.trim(),
+    });
 
     // stop if required fields are empty
-    if(formData.firstName === "" || formData.email === "" || formData.password === "")
-      throw new Error("firstname, email and pw cannot be empty strings")
+    if (
+      formData.firstName === "" ||
+      formData.email === "" ||
+      formData.password === ""
+    )
+      throw new Error("firstname, email and pw cannot be empty strings");
 
     try {
       const response = await axios.post("/api/users/signup", formData);
@@ -40,7 +45,7 @@ const Signup = () => {
         password: "",
         confirmPassword: "",
       });
-      router.push("/verifyemail")
+      router.push("/verifyemail");
     } catch (err) {
       console.log("Axios post error.");
       console.log(err);
@@ -140,14 +145,24 @@ const Signup = () => {
             </div>
 
             <div className="mx-auto">
-              <button type="submit" className="bg-blue-600 hover:bg-blue-700 w-fit p-2 min-w-[10rem] rounded text-white">
+              <button
+                type="submit"
+                className="bg-blue-600 hover:bg-blue-700 w-fit p-2 min-w-[10rem] rounded text-white"
+              >
                 Sign Up
               </button>
             </div>
           </form>
-          
-          <p className="text-slate-500 text-center">Already signed up? <Link href="/login" className="font-bold text-blue-600 underline hover:cursor-pointer">Log in</Link></p>
 
+          <p className="text-slate-500 text-center">
+            Already signed up?{" "}
+            <Link
+              href="/login"
+              className="font-bold text-blue-600 underline hover:cursor-pointer"
+            >
+              Log in
+            </Link>
+          </p>
         </div>
       </div>
     </>

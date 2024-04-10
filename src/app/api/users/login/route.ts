@@ -15,10 +15,7 @@ export async function POST(request: NextRequest) {
     // check if the user exists
     const user = await User.findOne({ email });
 
-    console.log(`User is : ${user}`)
-
     if (!user) {
-      console.log("No user found block executed")
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
 
@@ -26,7 +23,7 @@ export async function POST(request: NextRequest) {
     const isValidPassword = bcrypt.compare(password, user.password);
     if (!isValidPassword) {
       return NextResponse.json(
-        { message: "Password incorrect" },
+        { message: "Incorrect password" },
         { status: 401 }
       );
     }
@@ -57,7 +54,7 @@ export async function POST(request: NextRequest) {
 
     return response;
   } catch (err) {
-    console.log("A login error")
-    console.log(err)
+    console.log("login error")
+    return NextResponse.json(err)
   }
 }

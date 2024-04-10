@@ -4,20 +4,21 @@ import connectDB from "@/app/dbConfig/dbConfig";
 
 connectDB();
 
-export function GET(request: NextRequest, {params}: any) {
+export async function GET(request: NextRequest, {params}: any) {
     const {userId} = params;
     console.log(`User id is : ${userId}`);
+    console.log(typeof userId);
 
     
     // find the specific user
-    const user = User.findOne(userId);
+    const user = await User.findOne({userId});
     console.log(user);
-    return NextResponse.json({message: "Get single user"})
+    // return NextResponse.json(user)
 
-    // // if the user is not found
-    // if(!user) {
-    //     return NextResponse.json({message: "User not found"}, {status: 404});
-    // }
+    // if the user is not found
+    if(!user) {
+        return NextResponse.json({message: "User not found"}, {status: 404});
+    }
 
-    // return NextResponse.json(user);
+    return NextResponse.json(user);
 }

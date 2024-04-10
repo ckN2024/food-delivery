@@ -49,9 +49,9 @@ export async function POST(request: NextRequest) {
         const savedUser = await newUser.save();
 
         //send verification email
-        sendEmail({email, emailType: "VERIFY", userId: savedUser._id})
+        // sendEmail({email, emailType: "VERIFY", userId: savedUser._id})
 
-        return NextResponse.json(newUser);
+        return NextResponse.json(savedUser);
     } catch (err) {
         console.log("Failed to create and save user in database!!!");
         console.log(err);
