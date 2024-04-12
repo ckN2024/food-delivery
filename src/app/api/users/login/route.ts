@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
     );
 
     // set the response cookies.
-    response.cookies.set("token", token, { httpOnly: true });
+    response.cookies.set("authToken", token, { httpOnly: true });
 
 
     return response;

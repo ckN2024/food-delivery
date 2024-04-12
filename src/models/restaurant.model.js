@@ -117,6 +117,11 @@ const restaurantSchema = new mongoose.Schema({
         required: true
     },
 
+    foodItems: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: "FoodItem"
+    },
+
     // to be calculated based on user reviews
     rating: {
         type: Number,

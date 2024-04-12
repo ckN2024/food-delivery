@@ -24,7 +24,7 @@ const Category = {
     seafood: "seafood"
 }
 
-const fooditemSchema = new mongoose.Schema({
+const foodItemSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, "Name of the food item is required"],
@@ -33,6 +33,11 @@ const fooditemSchema = new mongoose.Schema({
     description: {
         type: String,
         required: [true, "Description of the food item is required"],
+    },
+
+    restaurantId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Restaurant"
     },
     
     images: {
@@ -81,4 +86,6 @@ const fooditemSchema = new mongoose.Schema({
 
 })
 
-const Fooditem = mongoose.models.fooditems || mongoose.model("fooditems", fooditemSchema);
+const FoodItem = mongoose.models.fooditems || mongoose.model("fooditems", foodItemSchema);
+
+export default FoodItem

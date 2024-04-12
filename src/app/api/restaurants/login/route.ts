@@ -36,7 +36,8 @@ export async function POST(request: NextRequest) {
         const tokenData = {
             id: restaurant._id,
             name: restaurant.name,
-            email: restaurant.email
+            email: restaurant.email,
+            role: "restaurant"
         }
         
         // create jwt token using the token data
@@ -53,7 +54,7 @@ export async function POST(request: NextRequest) {
           );
         
           // set the response cookies.
-          response.cookies.set("token", token, { httpOnly: true });
+          response.cookies.set("authToken", token, { httpOnly: true });
           
           return response
     } catch (err) {

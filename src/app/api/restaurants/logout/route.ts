@@ -7,7 +7,7 @@ export function GET() {
             message: "Restaurant logged out successfully."
         }, {status: 200})
 
-        response.cookies.set("token", "", {httpOnly: true});
+        response.cookies.delete("authToken");
 
         return response;
     } catch (err) {
