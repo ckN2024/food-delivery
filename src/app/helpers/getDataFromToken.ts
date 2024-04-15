@@ -2,11 +2,11 @@ import { NextRequest } from "next/server"
 import jwt, {JwtPayload} from "jsonwebtoken"
 
 interface TokenData {
-    id: Number | null,
-    role: string | null,
+    id: string | null,
+    role: string | null
 }
 
-const getDataFromToken = (request: NextRequest) => {
+const getDataFromToken = (request: NextRequest): TokenData => {
     // check token presence
     const authToken = request.cookies.get('authToken');
     
@@ -24,9 +24,7 @@ const getDataFromToken = (request: NextRequest) => {
     try {
         verifiedToken = jwt.verify(authToken.value, process.env.JWT_SECRET!) as JwtPayload
         const role: string = verifiedToken?.role
-        const id = verifiedToken?.id
-        console.log(`id from gdata is : ${id} and type ${typeof id}`)
-
+        const id: string = verifiedToken?.id
         return {
             id,
             role

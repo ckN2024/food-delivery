@@ -50,15 +50,25 @@ const foodItemSchema = new mongoose.Schema({
         enum: Object.values(Category),
     },
 
-    price: {
+    originalPrice: {
         type: Number,
         required: [true, "Price of the food item is required"]
     },
 
+    discountPercent: {
+        type: Number,
+        min: [0, "Minimum discount is 0%"],
+        max: [100, "Maximum discount is 100%"]
+    },
+
+    sellingPrice: {
+        type: Number,
+        required: [true, "Selling price of the food item is required."]
+    },
+
     availableSizes: {
-        type: String,
-        enum: Object.values(Size),
-        default: Size.medium,
+        type: [String],
+        enum: Object.values(Size)
     },
 
     ingredients: {

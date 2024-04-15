@@ -1,16 +1,4 @@
-import mongoose from "mongoose";
-
-const Role = {
-    user: "user",
-    primeUser: "prime user",
-    vendor: "vendor",
-    admin: "admin",
-    delivery: "delivery",
-    customerSupport: "customer support"
-}
-
-
-const userSchema = new mongoose.Schema({
+const deliveryBoySchema = new mongoose.Schema({
     photo: {
         type: String,
         default: "",
@@ -36,22 +24,24 @@ const userSchema = new mongoose.Schema({
         required: [true, 'email field is required'],
     },
 
-    role: {
-        type: String,
-        enum: Object.values(Role),
-        default: Role.user,
-    },
-
     isVerified: {
         type: Boolean,
         default: false,
     },
 
-    // location
-
-    addresses: {
-        type: [mongoose.Schema.Types.ObjectId],
+    permanentAddresses: {
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Address"
+    },
+
+    presentAddress: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Address"
+    },
+
+    aadharNumber: {
+        type: Number,
+        required: true
     },
 
     defaultAddress: {
@@ -59,16 +49,6 @@ const userSchema = new mongoose.Schema({
         ref: "Address"
     },
 
-    walletAmount: Number,
-
-    coupons: [String],
-
-    // assignedDeliveries:[{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: Delivery,
-    // }],
-
-    //delivery boy specific start
     incentiveEarned: {
         type: Number
     },
@@ -79,7 +59,11 @@ const userSchema = new mongoose.Schema({
     isOnline: {
         type: Boolean
     },
-    //delivery boy specific end
+
+    ordersAssigned: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Order"
+    },
 
     verifyToken: String,
 
@@ -93,9 +77,6 @@ const userSchema = new mongoose.Schema({
 
 }, {timestamps: true})
 
-const User = mongoose.models.users || mongoose.model('users', userSchema)
+const DeliveryBoy = mongoose.models.deliveryboys || mongoose.model('deliveryboys', deliveryBoySchema)
 
-export default User;
-
-
-
+export default DeliveryBoy;
