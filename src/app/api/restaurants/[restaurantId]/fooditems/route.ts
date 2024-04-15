@@ -20,7 +20,6 @@ export async function GET(request: NextRequest, { params }: any) {
   
   
     return NextResponse.json(foodItems)
-    //   return NextResponse.json(foodItems)
     } catch (error: any) {
       console.log("Error in getting food item for the specified restaurant")
       console.log(error.message)

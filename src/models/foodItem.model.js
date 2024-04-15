@@ -1,28 +1,6 @@
 import mongoose from "mongoose";
-
-const Size = {
-    small: "small",
-    medium: "medium",
-    large: "large",
-}
-
-const Category = {
-    appetizers: "appetizers",
-    mainCourses: "main courses",
-    sideDishes: "side dishes",
-    desserts: "desserts",
-    snacks: "snacks",
-    beverages: "beverages",
-    breakfastItems: "breakfast items",
-    sandwiches: "sandwiches",
-    salads: "salads",
-    soupsAndStews: "soups and stews",
-    pastaAndNoodles: "pasta and noodles",
-    riceDishes: "rice dishes",
-    pizzas: "pizzas",
-    burgersAndSandwiches: "burger and sandwiches",
-    seafood: "seafood"
-}
+import FoodCategory from "./Enums/FoodCategory"
+import FoodSize from "./Enums/FoodSize"
 
 const foodItemSchema = new mongoose.Schema({
     name: {
@@ -47,7 +25,7 @@ const foodItemSchema = new mongoose.Schema({
 
     category: {
         type: String,
-        enum: Object.values(Category),
+        enum: Object.values(FoodCategory),
     },
 
     originalPrice: {
@@ -68,7 +46,7 @@ const foodItemSchema = new mongoose.Schema({
 
     availableSizes: {
         type: [String],
-        enum: Object.values(Size)
+        enum: Object.values(FoodSize)
     },
 
     ingredients: {

@@ -1,3 +1,5 @@
+import mongoose from "mongoose"
+
 const AddressSchema = new mongoose.Schema({
     street: {
         type: String,
@@ -23,7 +25,11 @@ const AddressSchema = new mongoose.Schema({
         type: String,
         required: [true, "Area pin code is required"]
     },
+
+    isDefault: {
+        type: Boolean,
+        default: false
+    }
 }, {timestamps: true})
 
-const Address = mongoose.models.addresses || mongoose.model("addresses", AddressSchema);
-export default Address
+export default AddressSchema

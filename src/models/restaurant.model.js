@@ -1,49 +1,7 @@
 import mongoose from "mongoose";
-
-
-const restaurantAddressSchema = new mongoose.Schema({
-    street: {
-        type: String,
-        required: [true, "street field is required"]
-    },
-
-    area: {
-        type: String,
-        required: [true, "area field is required"]
-    },
-
-    city: {
-        type: String,
-        required: [true, "city field is required"]
-    },
-
-    state: {
-        type: String,
-        required: [true, "state field is required"]
-    },
-
-    pincode : {
-        type: String,
-        required: [true, "Area pin code is required"]
-    },
-
-}, {timeStamps: true})
-
-const EstablishmentType = {
-    deliveryAndDineIn: "delivery and dine in",
-    dineIn: "dine in",
-    devliery: "delivery"
-}
-
-const OpenDays = {
-    monday: "monday",
-    tuesday: "tuesday",
-    wednesday: "wednesday",
-    thursday: "thursday",
-    friday: "friday",
-    saturday: "saturday",
-    sunday: "sunday",
-}
+import AddressSchema from "./Schemas/AddressSchema";
+import RestaurantEstablishmentType from "./Enums/RestaurantEstablishmentType"
+import WeekDays from "./Enums/Weekdays"
 
 const restaurantSchema = new mongoose.Schema({
     // restaurant name
@@ -79,18 +37,18 @@ const restaurantSchema = new mongoose.Schema({
     },
 
     address: {
-        type: restaurantAddressSchema,
+        type: AddressSchema,
         required: true,
     },
 
     establishmentType: {
         type: String,
-        enum: Object.values(EstablishmentType)
+        enum: Object.values(RestaurantEstablishmentType)
     },
     
     openDays: {
         type: [String],
-        enum: Object.values(OpenDays)
+        enum: Object.values(WeekDays)
     },
 
     // timings: {

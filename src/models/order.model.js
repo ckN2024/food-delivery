@@ -1,32 +1,6 @@
 import mongoose from "mongoose"
-
-// seperate address for delivery: in case an address gets deleted, the address in orders archive will not be affected
-const deliveryAddressSchema = new mongoose.Schema({
-    street: {
-        type: String,
-        required: [true, "street field is required"]
-    },
-
-    area: {
-        type: String,
-        required: [true, "area field is required"]
-    },
-
-    city: {
-        type: String,
-        required: [true, "city field is required"]
-    },
-
-    state: {
-        type: String,
-        required: [true, "state field is required"]
-    },
-
-    pincode : {
-        type: String,
-        required: [true, "Area pin code is required"]
-    },
-})
+import AddressSchema from "./Schemas/AddressSchema"
+import OrderStatus from "./Enums/OrderStatus"
 
 const orderSchema = new mongoose.Schema({
     restaurantIds: {
@@ -57,10 +31,13 @@ const orderSchema = new mongoose.Schema({
         required: [true, "delivery charges is required"]
     },
 
-    // assignedTo:
+    assignedTo: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "DeliveryBoy"
+    },
 
     deliveryAddress: {
-        type: deliveryAddressSchema,
+        type: AddressSchema,
         required: [true, "Delivery address is required"]
     },
 
@@ -70,6 +47,11 @@ const orderSchema = new mongoose.Schema({
     //     required: true
     // }
 
+    status: {
+        type: String,
+        enum: Object.values(OrderStatus),
+        default: OrderStatus.pending
+    },
 
     estimatedDeliveryTime: {
         type: Date

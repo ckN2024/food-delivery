@@ -1,3 +1,6 @@
+import mongoose from "mongoose";
+import AddressSchema from "./Schemas/AddressSchema";
+
 const deliveryBoySchema = new mongoose.Schema({
     photo: {
         type: String,
@@ -21,7 +24,7 @@ const deliveryBoySchema = new mongoose.Schema({
 
     password: {
         type: String,
-        required: [true, 'email field is required'],
+        required: [true, "email field is required"],
     },
 
     isVerified: {
@@ -29,15 +32,9 @@ const deliveryBoySchema = new mongoose.Schema({
         default: false,
     },
 
-    permanentAddresses: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Address"
-    },
+    permanentAddresses: AddressSchema,
 
-    presentAddress: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Address"
-    },
+    presentAddress: AddressSchema,
 
     aadharNumber: {
         type: Number,
@@ -52,7 +49,12 @@ const deliveryBoySchema = new mongoose.Schema({
     incentiveEarned: {
         type: Number
     },
+
     incentivePaid: {
+        type: Number
+    },
+
+    incentiveUnpaid: {
         type: Number
     },
 

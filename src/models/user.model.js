@@ -1,13 +1,6 @@
 import mongoose from "mongoose";
-
-const Role = {
-    user: "user",
-    primeUser: "prime user",
-    vendor: "vendor",
-    admin: "admin",
-    delivery: "delivery",
-    customerSupport: "customer support"
-}
+import AddressSchema from "./Schemas/AddressSchema"
+import UserRole from "./Enums/UserRole"
 
 
 const userSchema = new mongoose.Schema({
@@ -38,7 +31,7 @@ const userSchema = new mongoose.Schema({
 
     role: {
         type: String,
-        enum: Object.values(Role),
+        enum: Object.values(UserRole),
         default: Role.user,
     },
 
@@ -49,15 +42,7 @@ const userSchema = new mongoose.Schema({
 
     // location
 
-    addresses: {
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: "Address"
-    },
-
-    defaultAddress: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Address"
-    },
+    addresses: [AddressSchema],
 
     walletAmount: Number,
 
@@ -78,6 +63,11 @@ const userSchema = new mongoose.Schema({
 
     isOnline: {
         type: Boolean
+    },
+
+    ordersAssigned: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Order"
     },
     //delivery boy specific end
 
