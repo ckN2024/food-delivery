@@ -1,25 +1,25 @@
 import connectDB from "@/app/dbConfig/dbConfig";
 import getDataFromToken from "@/app/helpers/getDataFromToken";
-import User from "@/models/user.model";
+import DeliveryBoy from "@/models/deliveryBoy.model";
 import { NextRequest, NextResponse } from "next/server";
 
 connectDB()
 
 export function GET(request: NextRequest) {
     try {
-        // check user authenticity
+        // check deliveryboy authenticity
         const {id} = getDataFromToken(request)
-        const user = User.findById(id)
+        const deliveryBoy = DeliveryBoy.findById(id)
 
-        if(!user) {
+        if(!deliveryBoy) {
             return NextResponse.json({
-                message: "User trying to log out does not exist"
+                message: "Delivery boy trying to log out does not exist"
             })
         }
 
 
         const response = NextResponse.json({
-            message: "User logged out successfully."
+            message: "Delivery boy logged out successfully."
         }, {status: 200})
 
         response.cookies.delete("authToken");

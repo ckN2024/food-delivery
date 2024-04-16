@@ -1,4 +1,4 @@
-import Restaurant from "@/models/restaurant.model";
+import Vendor from "@/models/vendor.model";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -12,18 +12,18 @@ export async function POST(request: NextRequest) {
         
         const {email, password} = requestObj;
         
-        // check if restaurant exists.
-        const restaurant = await Restaurant.findOne({email})
+        // check if vendor exists.
+        const vendor = await Vendor.findOne({email})
         
-        // if restaurant not found
-        if(!restaurant) {
+        // if vendor not found
+        if(!vendor) {
             return NextResponse.json({
                 message: ""
             }, {status: 404})
         }
         
         // check password 
-        const isValidPassword = await bcrypt.compare(password, restaurant.password);
+        const isValidPassword = await bcrypt.compare(password, vendor.password);
         
         // incorrect password
         if(!isValidPassword) {
@@ -34,10 +34,10 @@ export async function POST(request: NextRequest) {
         
         // create token data
         const tokenData = {
-            id: restaurant._id,
-            name: restaurant.name,
-            email: restaurant.email,
-            role: "restaurant"
+            id: vendor._id,
+            name: vendor.name,
+            email: vendor.email,
+            role: "vendor"
         }
         
         // create jwt token using the token data
@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
           
           return response
     } catch (err) {
-        console.log("error in restaurant login");
+        console.log("error in vendor login");
         return NextResponse.json(err);
     }
 }

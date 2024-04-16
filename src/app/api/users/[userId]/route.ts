@@ -4,6 +4,7 @@ import connectDB from "@/app/dbConfig/dbConfig";
 
 connectDB();
 
+// get user by id
 export async function GET(request: NextRequest, {params}: any) {
     const {userId} = params;
     console.log(`User id is : ${userId}`);
@@ -11,7 +12,7 @@ export async function GET(request: NextRequest, {params}: any) {
 
     
     // find the specific user
-    const user = await User.findOne({userId});
+    const user = await User.findOne({_id: userId});
     console.log(user);
     // return NextResponse.json(user)
 

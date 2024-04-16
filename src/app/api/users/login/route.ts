@@ -33,6 +33,7 @@ export async function POST(request: NextRequest) {
       id: user._id,
       firstName: user.firstName,
       email: user.email,
+      role: user.role
     };
 
     // create a jwt token using the token data

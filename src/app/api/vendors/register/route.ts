@@ -1,22 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/app/dbConfig/dbConfig";
-import Restaurant from "@/models/restaurant.model";
+import Vendor from "@/models/vendor.model";
 import bcrypt from "bcrypt";
 
 connectDB()
 
-// register a restaurant
+// register a vendor
 export async function POST(request: NextRequest) {
     const requestObj = await request.json()
 
     let {name, email, password, description, ownerName, mobileNumber, address, isVeg, isNonVeg, isPureVeg} = requestObj
 
     // check if the email is already registered.
-    const restaurant = await Restaurant.findOne({email: email})
+    const vendor = await Vendor.findOne({email: email})
 
-    if(restaurant) {
+    if(vendor) {
         return NextResponse.json({
-            message: "email already in use for a restaurant"
+            message: "email already in use for a vendor"
         }, {status: 409})
     }
 
@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
     const hashedPassword = await bcrypt.hash(password, salt)
 
     try {
-        const newRestaurant = new Restaurant({
+        const newVendor = new Vendor({
             name,
             email,
             password: hashedPassword,
@@ -38,16 +38,16 @@ export async function POST(request: NextRequest) {
             isPureVeg
         })
 
-        const savedRestaurant = await newRestaurant.save()
+        const savedVendor = await newVendor.save()
 
         // send email for verification
         
-        return NextResponse.json(savedRestaurant, {status: 200})
+        return NextResponse.json(savedVendor, {status: 200})
     } catch (err) {
-        console.log("Error occured in saving the restaurant")
+        console.log("Error occured in saving the vendor")
 
         return NextResponse.json({
-            message: "Failed to create and save the restaurant",
+            message: "Failed to create and save the vendor",
             err
         })
     }
@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
 
 
     // return NextResponse.json({
-    //     message: " response from backend : register restaurant",
+    //     message: " response from backend : register vendor",
     //     requestObj
     // })
     

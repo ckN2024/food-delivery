@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import getDataFromToken from "@/app/helpers/getDataFromToken";
 import { redirect } from "next/navigation";
 import FoodItem from "@/models/foodItem.model";
-import Restaurant from "@/models/restaurant.model";
+import Vendor from "@/models/vendor.model";
 
 
 // upload a food item
@@ -12,14 +12,14 @@ export async function POST(request: NextRequest) {
         const { role, id } = tokenData;
     
         // redirect for unauthorised roles
-        if (role === null || role !== 'restaurant') {
-            redirect('/api/restaurants/login');
+        if (role === null || role !== 'vendor') {
+            redirect('/api/vendors/login');
         }
     
         const requestObj = await request.json();
         let { name, description, images, category, originalPrice, discountPercent, sellingPrice, availableSizes, ingredients, preparationTime, availability, rating } = requestObj;
         
-        const restaurant = await Restaurant.findById(id)
+        const vendor = await Vendor.findById(id)
         
         // Calculate selling price and discount percent in case not provided.
         // calculate the selling price
@@ -42,15 +42,15 @@ export async function POST(request: NextRequest) {
             preparationTime,
             availability,
             rating,
-            // add the logged-in restaurant id to the food item
-            restaurantId: restaurant._id
+            // add the logged-in vendor id to the food item
+            vendorId: vendor._id
         });
     
         const savedFoodItem = await newFoodItem.save();
     
-        // add the food item to the logged-in restaurant
-        restaurant.foodItems.push(savedFoodItem._id)
-        await restaurant.save()
+        // add the food item to the logged-in vendor
+        vendor.foodItems.push(savedFoodItem._id)
+        await vendor.save()
     
         return NextResponse.json(savedFoodItem);
     } catch (error) {

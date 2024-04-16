@@ -1,5 +1,5 @@
 import FoodItem from "@/models/foodItem.model";
-import Restaurant from "@/models/restaurant.model";
+import Vendor from "@/models/vendor.model";
 import { NextRequest, NextResponse } from "next/server";
 
 interface urlParamsProps {
@@ -21,16 +21,16 @@ export async function DELETE(request: NextRequest, { params }: urlParamsProps) {
     }
     await FoodItem.deleteOne({ _id: foodItem._id });
 
-    // delete the foodItem from the restaurant foodItems array
-    const restaurant = await Restaurant.findById(foodItem.restaurantId);
+    // delete the foodItem from the vendor foodItems array
+    const vendor = await Vendor.findById(foodItem.vendorId);
 
-    if (!restaurant) {
-      console.log("Associated restaurant with the foodItem not found");
+    if (!vendor) {
+      console.log("Associated vendor with the foodItem not found");
     }
-    restaurant.foodItems = restaurant.foodItems.filter(
+    vendor.foodItems = vendor.foodItems.filter(
       (id: any) => id.toString() !== foodItem._id.toString()
     );
-    await restaurant.save();
+    await vendor.save();
 
     return NextResponse.json({
       message: "Item deleted",

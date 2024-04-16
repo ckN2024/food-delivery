@@ -12,9 +12,9 @@ const foodReviewSchema = new mongoose.Schema({
         ref: "FoodItem"
     },
 
-    restaurantId: {
+    vendorId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Restaurant"
+        ref: "Vendor"
     },
 
     rating: {

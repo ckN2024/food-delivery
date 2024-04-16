@@ -37,13 +37,8 @@ const deliveryBoySchema = new mongoose.Schema({
     presentAddress: AddressSchema,
 
     aadharNumber: {
-        type: Number,
+        type: String,
         required: true
-    },
-
-    defaultAddress: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Address"
     },
 
     incentiveEarned: {
@@ -59,11 +54,12 @@ const deliveryBoySchema = new mongoose.Schema({
     },
 
     isOnline: {
-        type: Boolean
+        type: Boolean,
+        default: false
     },
 
     ordersAssigned: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: [mongoose.Schema.Types.ObjectId],
         ref: "Order"
     },
 

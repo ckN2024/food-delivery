@@ -1,18 +1,18 @@
 import mongoose from "mongoose";
 import AddressSchema from "./Schemas/AddressSchema";
-import RestaurantEstablishmentType from "./Enums/RestaurantEstablishmentType"
+import VendorEstablishmentType from "./Enums/VendorEstablishmentType"
 import WeekDays from "./Enums/Weekdays"
 
-const restaurantSchema = new mongoose.Schema({
-    // restaurant name
+const vendorSchema = new mongoose.Schema({
+    // vendor name
     name: {
         type: String,
-        required: [true, "restaurant name is required"]
+        required: [true, "vendor name is required"]
     },
 
     email: {
         type: String,
-        required: [true, "restaurnat email is required"],
+        required: [true, "vendor email is required"],
         unique: true,
     },
 
@@ -28,7 +28,7 @@ const restaurantSchema = new mongoose.Schema({
     
     ownerName: {
         type: String,
-        required: [true, "restaurant owner name is required"]
+        required: [true, "vendor owner name is required"]
     },
 
     mobileNumber: {
@@ -43,7 +43,7 @@ const restaurantSchema = new mongoose.Schema({
 
     establishmentType: {
         type: String,
-        enum: Object.values(RestaurantEstablishmentType)
+        enum: Object.values(VendorEstablishmentType)
     },
     
     openDays: {
@@ -57,13 +57,13 @@ const restaurantSchema = new mongoose.Schema({
 
     minimumOrderValue: Number,
 
-    // for reataurants that offer veg food
+    // for vendor that offer veg food
     isVeg: {
         type: Boolean,
         required: true
     },
 
-    // for restaurant that offers non-veg food
+    // for vendor that offers non-veg food
     isNonVeg: {
         type: Boolean,
         required: true
@@ -88,14 +88,14 @@ const restaurantSchema = new mongoose.Schema({
         max: [5, "maximum rating value is 5"]
     },
 
-    // user reviews of the restaurant
+    // user reviews of the vendor
     reviews: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "RestaurantReview"
+        ref: "VendorReview"
     },
 
 }, {timestamps: true})
 
-const Restaurant = mongoose.models.restaurants || new mongoose.model('restaurants', restaurantSchema);
+const Vendor = mongoose.models.vendors || new mongoose.model('vendors', vendorSchema);
 
-export default Restaurant;
+export default Vendor;

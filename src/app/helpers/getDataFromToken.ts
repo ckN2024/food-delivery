@@ -1,9 +1,10 @@
 import { NextRequest } from "next/server"
 import jwt, {JwtPayload} from "jsonwebtoken"
 
+// return type of getDataFromToken
 interface TokenData {
     id: string | null,
-    role: string | null
+    role: string | null,
 }
 
 const getDataFromToken = (request: NextRequest): TokenData => {

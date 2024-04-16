@@ -3,12 +3,6 @@ import AddressSchema from "./Schemas/AddressSchema"
 import OrderStatus from "./Enums/OrderStatus"
 
 const orderSchema = new mongoose.Schema({
-    restaurantIds: {
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: "Restaurant",
-        required: [true, "restaurantId is required"]
-    },
-
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -46,6 +40,11 @@ const orderSchema = new mongoose.Schema({
     //     enum: ['cash', 'card', 'upi'],
     //     required: true
     // }
+
+    isPaid: {
+        type: Boolean,
+        required: true
+    }, 
 
     status: {
         type: String,

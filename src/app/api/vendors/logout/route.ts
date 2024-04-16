@@ -1,30 +1,29 @@
-import connectDB from "@/app/dbConfig/dbConfig";
-import getDataFromToken from "@/app/helpers/getDataFromToken";
-import User from "@/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
+import getDataFromToken from "@/app/helpers/getDataFromToken";
+import Vendor from "@/models/vendor.model";
+import connectDB from "@/app/dbConfig/dbConfig";
 
 connectDB()
 
 export function GET(request: NextRequest) {
     try {
-        // check user authenticity
+        // check vendor authenticity
         const {id} = getDataFromToken(request)
-        const user = User.findById(id)
+        const vendor = Vendor.findById(id)
 
-        if(!user) {
+        if(!vendor) {
             return NextResponse.json({
-                message: "User trying to log out does not exist"
+                message: "Vendor trying to log out does not exist"
             })
-        }
-
+        }        
 
         const response = NextResponse.json({
-            message: "User logged out successfully."
+            message: "Vendor logged out successfully."
         }, {status: 200})
 
         response.cookies.delete("authToken");
 
-        return response
+        return response;
     } catch (err) {
         console.log("Logout error.")
         return NextResponse.json(err)

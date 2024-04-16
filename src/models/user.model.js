@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import AddressSchema from "./Schemas/AddressSchema"
 import UserRole from "./Enums/UserRole"
+import CartItemSchema from "./Schemas/CartItemSchema"
 
 
 const userSchema = new mongoose.Schema({
@@ -32,13 +33,20 @@ const userSchema = new mongoose.Schema({
     role: {
         type: String,
         enum: Object.values(UserRole),
-        default: Role.user,
+        default: UserRole.user,
     },
 
     isVerified: {
         type: Boolean,
         default: false,
     },
+
+    foodItemsBought: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: "FoodItem"
+    },
+
+    cartItems: [ CartItemSchema ],
 
     // location
 
@@ -48,29 +56,6 @@ const userSchema = new mongoose.Schema({
 
     coupons: [String],
 
-    // assignedDeliveries:[{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: Delivery,
-    // }],
-
-    //delivery boy specific start
-    incentiveEarned: {
-        type: Number
-    },
-    incentivePaid: {
-        type: Number
-    },
-
-    isOnline: {
-        type: Boolean
-    },
-
-    ordersAssigned: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Order"
-    },
-    //delivery boy specific end
-
     verifyToken: String,
 
     verifyTokenExpiry: Date,
@@ -78,8 +63,6 @@ const userSchema = new mongoose.Schema({
     forgotPasswordToken: String,
 
     forgotPasswordTokenExpiry: Date,
-
-
 
 }, {timestamps: true})
 

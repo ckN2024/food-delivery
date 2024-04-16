@@ -13,9 +13,9 @@ const foodItemSchema = new mongoose.Schema({
         required: [true, "Description of the food item is required"],
     },
 
-    restaurantId: {
+    vendorId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Restaurant"
+        ref: "Vendor"
     },
     
     images: {
@@ -67,13 +67,9 @@ const foodItemSchema = new mongoose.Schema({
     rating: Number,
 
     // reviews:
-
-
-
-
-
 })
 
 const FoodItem = mongoose.models.fooditems || mongoose.model("fooditems", foodItemSchema);
 
 export default FoodItem
+export {foodItemSchema}

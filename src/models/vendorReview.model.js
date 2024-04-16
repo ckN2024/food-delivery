@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
 
-// when user gives restaurant review
-const restaurantReviewSchema = new mongoose.Schema({
+// when user gives vendor review
+const vendorReviewSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
     
-    restaurantId: {
+    vendorId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Restaurant"
+        ref: "Vendor"
     },
 
     rating: {
@@ -30,6 +30,6 @@ const restaurantReviewSchema = new mongoose.Schema({
 
 }, {timestamps: true})
 
-const RestaurantReview = mongoose.models.restaurantreviews || mongoose.model('restaurantreviews', restaurantReviewSchema);
+const VendorReview = mongoose.models.vendorreviews || mongoose.model('vendorreviews', vendorReviewSchema);
 
-export default RestaurantReview;
+export default VendorReview;
