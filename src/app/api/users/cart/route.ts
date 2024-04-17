@@ -2,7 +2,7 @@
 // add to cart
 // remove from cart
 
-import connectDB from "@/app/dbConfig/dbConfig";
+import connectDB from "@/lib/dbConfig";
 import getDataFromToken from "@/app/helpers/getDataFromToken";
 import FoodItem, { foodItemSchema } from "@/models/foodItem.model";
 import User from "@/models/user.model";

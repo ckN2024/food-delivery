@@ -1,4 +1,4 @@
-import connectDB from "@/app/dbConfig/dbConfig";
+import connectDB from "@/lib/dbConfig";
 import FoodItem from "@/models/foodItem.model";
 import Vendor from "@/models/vendor.model"
 import mongoose from "mongoose";

@@ -2,7 +2,6 @@ import getDataFromToken from "@/app/helpers/getDataFromToken";
 import FoodItem from "@/models/foodItem.model";
 import { NextRequest, NextResponse } from "next/server";
 import UserRole from "@/models/Enums/UserRole";
-import User from "@/models/user.model";
 import FoodReview from "@/models/foodreview.model"
 
 interface urlParamsProps {

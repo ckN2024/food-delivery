@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/user.model";
-import connectDB from "@/app/dbConfig/dbConfig";
+import connectDB from "@/lib/dbConfig";
 
 connectDB();
 

@@ -1,8 +1,7 @@
-import Restaurant from "@/models/restaurant.model";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import connectDB from "@/app/dbConfig/dbConfig";
+import connectDB from "@/lib/dbConfig";
 import DeliveryBoy from "@/models/deliveryBoy.model";
 
 connectDB();

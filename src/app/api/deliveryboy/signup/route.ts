@@ -1,4 +1,4 @@
-import connectDB from "@/app/dbConfig/dbConfig";
+import connectDB from "@/lib/dbConfig";
 import { NextRequest, NextResponse } from "next/server";
 import DeliveryBoy from "@/models/deliveryBoy.model"
 import bcrypt from "bcrypt";
