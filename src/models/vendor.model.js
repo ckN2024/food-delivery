@@ -80,6 +80,11 @@ const vendorSchema = new mongoose.Schema({
         ref: "FoodItem"
     },
 
+    ordersRecieved: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: "Order"
+    },
+
     // to be calculated based on user reviews
     rating: {
         type: Number,

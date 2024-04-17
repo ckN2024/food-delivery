@@ -2,7 +2,7 @@ const OrderStatus = {
     pending: "pending",
     confirmed: "confirmed",
     preparing: "preparing",
-    outForDelivery: "outForDelivery",
+    outForDelivery: "out for delivery",
     delivered: "delivered",
     cancelled: "cancelled"
 }

@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
 import AddressSchema from "./Schemas/AddressSchema"
 import OrderStatus from "./Enums/OrderStatus"
+import PaymentMethod from "./Enums/PaymentMethod"
 
 const orderSchema = new mongoose.Schema({
     userId: {
@@ -35,11 +36,11 @@ const orderSchema = new mongoose.Schema({
         required: [true, "Delivery address is required"]
     },
 
-    // paymentMethod: {
-    //     type: String,
-    //     enum: ['cash', 'card', 'upi'],
-    //     required: true
-    // }
+    paymentMethod: {
+        type: String,
+        enum: Object.values(PaymentMethod),
+        required: true
+    },
 
     isPaid: {
         type: Boolean,

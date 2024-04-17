@@ -12,9 +12,9 @@ export async function POST(request: NextRequest) {
         const { role, id } = tokenData;
     
         // redirect for unauthorised roles
-        if (role === null || role !== 'vendor') {
-            redirect('/api/vendors/login');
-        }
+        // if (role === null || role !== 'vendor') {
+        //     redirect('/api/vendors/login');
+        // }
     
         const requestObj = await request.json();
         let { name, description, images, category, originalPrice, discountPercent, sellingPrice, availableSizes, ingredients, preparationTime, availability, rating } = requestObj;
@@ -53,11 +53,11 @@ export async function POST(request: NextRequest) {
         await vendor.save()
     
         return NextResponse.json(savedFoodItem);
-    } catch (error) {
+    } catch (error: any) {
         console.log("Error in uploading food item");
         return NextResponse.json({
             message: "Error in uploading food item",
-            error
+            error: error.message
         })
     }
 
