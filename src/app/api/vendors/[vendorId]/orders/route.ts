@@ -13,6 +13,7 @@ interface urlParamsProps {
 
 connectDB()
 
+// get all orders of a vendor by id
 export async function GET(request: NextRequest, {params}: urlParamsProps) {
     try {
         const {role} = getDataFromToken(request)
