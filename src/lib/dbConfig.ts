@@ -7,7 +7,6 @@ type ConnectionObject = {
 const connection: ConnectionObject = {}
 
 async function connectDB(): Promise<void> {
-    console.log("First entry : isConnected: ", connection.isConnected)
     if(connection.isConnected) {
         console.log("Already connected to database")
         return
